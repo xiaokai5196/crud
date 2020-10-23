@@ -1,7 +1,6 @@
 package com.dict.emp.common;
 
 import com.alibaba.fastjson.JSONObject;
-
 import java.util.LinkedHashMap;
 
 public class ReturnUtil {

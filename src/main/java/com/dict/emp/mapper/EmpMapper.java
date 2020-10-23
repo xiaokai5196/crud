@@ -10,7 +10,6 @@ import java.util.Map;
 
 public interface EmpMapper {
 
-    //根据条件查询员工信息
     List<EmpInfo> selectEmpList(JSONObject params);
 
     List<Map<String, Object>> selectDeptCount(Integer deptno);

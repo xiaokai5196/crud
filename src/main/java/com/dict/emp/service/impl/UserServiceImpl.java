@@ -49,9 +49,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public int batchUpdate(List<User> userList) {
         for (int i = 0, length = userList.size(); i < length; i++) {
-            update(userList.get(i));
+            userMapper.update(userList.get(i));
         }
-        return 0;
+        return userList.size();
     }
 
     @Override

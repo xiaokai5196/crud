@@ -24,7 +24,6 @@ public class EmpController {
     @Autowired
     private EmpService empService;
 
-
     /**
      * 条件+分页查询员工信息
      * 员工信息包含基本信息，部门信息和薪资等级
@@ -101,11 +100,5 @@ public class EmpController {
         EmpDetail empDetail = empService.selectDetailByIdName(emp);
         return ReturnUtil.returnSuccess("success", empDetail);
     }
-
-
-
-
-
-
 
 }
