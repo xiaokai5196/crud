@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dict.emp.mapper.FileMapper">
+
+    <resultMap id="baseResultMap" type="FileInfo">
+        <id column="file_id" jdbcType="VARCHAR" property="fileId" />
+        <result column="old_filename" jdbcType="VARCHAR" property="oldFilename" />
+        <result column="new_filename" jdbcType="VARCHAR" property="newFilename" />
+        <result column="file_suffixname" jdbcType="VARCHAR" property="fileSuffixName" />
+        <result column="file_content_type" jdbcType="VARCHAR" property="fileContentType" />
+        <result column="file_relative_path" jdbcType="VARCHAR" property="fileRelativePath" />
+        <result column="file_absolute_path" jdbcType="VARCHAR" property="fileAbsolutePath" />
+        <result column="file_size" jdbcType="BIGINT" property="fileSize" />
+        <result column="file_format_size" jdbcType="VARCHAR" property="fileFormatSize" />
+        <result column="download_count" jdbcType="INTEGER" property="downloadCount" />
+        <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+        <result column="upload_user" jdbcType="BIGINT" property="uploadUser" />
+        <result column="user_name" jdbcType="VARCHAR" property="uploadUserName" />
+    </resultMap>
+
+    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="baseResultMap">
+        select u.user_name, f.*
+        from file f left join sys_user u on u.user_id = f.upload_user
+        <where>
+            <if test="userId != null">
+                upload_user = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectByFileId" parameterType="java.lang.String" resultMap="baseResultMap">
+        select * from file where file_id = #{fileId}
+    </select>
+
+    <insert id="insert" parameterType="com.dict.emp.entity.FileInfo">
+        insert into file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            file_id,
+            <if test="oldFilename != null">
+                old_filename,
+            </if>
+            <if test="newFilename != null">
+                new_filename,
+            </if>
+            <if test="fileSuffixName != null">
+                file_suffixname,
+            </if>
+            <if test="fileContentType != null">
+                file_content_type,
+            </if>
+            <if test="fileRelativePath != null">
+                file_relative_path,
+            </if>
+            <if test="fileAbsolutePath != null">
+                file_absolute_path,
+            </if>
+            <if test="fileSize != null">
+                file_size,
+            </if>
+            <if test="fileFormatSize != null">
+                file_format_size,
+            </if>
+            <if test="downloadCount != null">
+                download_count,
+            </if>
+            <if test="uploadTime != null">
+                upload_time,
+            </if>
+            <if test="uploadUser != null">
+                upload_user,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            #{fileId},
+            <if test="oldFilename != null">
+                #{oldFilename},
+            </if>
+            <if test="newFilename != null">
+                #{newFilename},
+            </if>
+            <if test="fileSuffixName != null">
+                #{fileSuffixName},
+            </if>
+            <if test="fileContentType != null">
+                #{fileContentType},
+            </if>
+            <if test="fileRelativePath != null">
+                #{fileRelativePath},
+            </if>
+            <if test="fileAbsolutePath != null">
+                #{fileAbsolutePath},
+            </if>
+            <if test="fileSize != null">
+                #{fileSize},
+            </if>
+            <if test="fileFormatSize != null">
+                #{fileFormatSize},
+            </if>
+            <if test="downloadCount != null">
+                #{downloadCount},
+            </if>
+            <if test="uploadTime != null">
+                #{uploadTime},
+            </if>
+            <if test="uploadUser != null">
+                #{uploadUser},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.dict.emp.entity.FileInfo">
+        update file
+        <set>
+            <if test="oldFilename != null">
+                old_filename = #{oldFilename},
+            </if>
+            <if test="newFilename != null">
+                new_filename = #{newFilename},
+            </if>
+            <if test="fileSuffixName != null">
+                file_suffixname = #{fileSuffixName},
+            </if>
+            <if test="fileContentType != null">
+                file_content_type = #{fileContentType},
+            </if>
+            <if test="fileRelativePath != null">
+                file_relative_path = #{fileRelativePath},
+            </if>
+            <if test="fileAbsolutePath != null">
+                file_absolute_path = #{fileAbsolutePath},
+            </if>
+            <if test="fileSize != null">
+                file_size = #{fileSize},
+            </if>
+            <if test="fileFormatSize != null">
+                file_format_size = #{fileFormatSize},
+            </if>
+            <if test="downloadCount != null">
+                download_count = #{downloadCount},
+            </if>
+            <if test="uploadTime != null">
+                upload_time = #{uploadTime},
+            </if>
+            <if test="uploadUser != null">
+                upload_user = #{uploadUser},
+            </if>
+        </set>
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from file where file_id = #{fileId}
+    </delete>
+
+
+
+</mapper>
